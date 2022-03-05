@@ -1,0 +1,16 @@
+  File: src/index.html
+  Size: 391       	Blocks: 8          IO Block: 4096   regular file
+Device: fd08h/64776d	Inode: 1925489     Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1001/   javor)   Gid: ( 1001/   javor)
+Access: 2022-03-06 00:35:49.122910386 +0200
+Modify: 2022-03-06 00:35:49.102911401 +0200
+Change: 2022-03-06 00:35:49.134909776 +0200
+ Birth: 2022-03-06 00:35:49.102911401 +0200
+  File: src/tailwind.css
+  Size: 296       	Blocks: 8          IO Block: 4096   regular file
+Device: fd08h/64776d	Inode: 1925685     Links: 1
+Access: (0664/-rw-rw-r--)  Uid: ( 1001/   javor)   Gid: ( 1001/   javor)
+Access: 2022-03-06 00:35:49.122910386 +0200
+Modify: 2022-03-06 00:35:25.168126062 +0200
+Change: 2022-03-06 00:35:25.204124237 +0200
+ Birth: 2022-03-06 00:35:25.168126062 +0200

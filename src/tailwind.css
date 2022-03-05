@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn-cool-2 {
+    @apply mt-3 rounded-lg py-9 px-5 bg-blue-200 inline-block font-medium cursor-pointer;
+  }
+}
+
+.btn-cool-1 {
+  @apply mt-3 rounded-lg py-9 px-5 bg-red-500 inline-block font-medium cursor-pointer;
+}
