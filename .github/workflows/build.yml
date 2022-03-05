@@ -1,0 +1,71 @@
+name: build
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+
+  test_tailwindcss:
+    strategy:
+      matrix:
+        os: ['ubuntu-latest']
+        node: [17.6.0]
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
+    name: Test tailwindcss ${{ matrix.os }}, node ${{ matrix.node }}
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Setup
+        run: |
+          npm install
+          npx pm2 start ecosystem.config.js
+          npx pm2 ls
+          sleep 3
+          echo "Initial output"
+          echo "${{ github.workspace }}"
+          /bin/bash -c "grep 'btn-cool' dist/output.css || echo EMPTY"
+          echo "Setup done"
+
+      - if: always()
+        name: Test 1
+        run: |
+          cp templates/tailwind.css.1 src/tailwind.css
+          sleep 3
+          echo "## start after cp t 1"
+          grep 'btn-cool' dist/output.css
+          echo "## end after cp t 1"
+          cp templates/index.html.1 src/index.html
+          sleep 3
+          echo "## start after cp i 1"
+          grep 'btn-cool' dist/output.css
+          echo "## end after cp i 1"
+          grep 'btn-cool-1' dist/output.css
+
+      - if: always()
+        name: Test 2
+        run: |
+          cp templates/tailwind.css.2 src/tailwind.css
+          sleep 3
+          echo "## start after cp t 2"
+          grep 'btn-cool' dist/output.css
+          echo "## end after cp t 2"
+          cp templates/index.html.2 src/index.html
+          sleep 3
+          echo "## start after cp i 2"
+          grep 'btn-cool' dist/output.css
+          echo "## end after cp i 2"
+          grep 'btn-cool-2' dist/output.css
+
+      - if: always()
+        name: Logs
+        run: npx pm2 log --nostream --lines 1000 --timestamp tailwindcss-watch
+
+      - if: always()
+        run: cat dist/output.css
+
