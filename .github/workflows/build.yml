@@ -10,9 +10,10 @@ jobs:
       matrix:
         os: ['ubuntu-latest']
         node: [17.6.0]
+        change_cmd: ['cp', 'mv']
     runs-on: ${{ matrix.os }}
     continue-on-error: true
-    name: Test tailwindcss ${{ matrix.os }}, node ${{ matrix.node }}
+    name: ${{ matrix.change_cmd }}
     timeout-minutes: 5
 
     steps:
@@ -35,31 +36,31 @@ jobs:
       - if: always()
         name: Test 1
         run: |
-          cp templates/tailwind.css.1 src/tailwind.css
+          ${{ matrix.change_cmd }} templates/tailwind.css.1 src/tailwind.css
           sleep 3
-          echo "## start after cp t 1"
+          echo "## start after ${{ matrix.change_cmd }} t 1"
           grep 'btn-cool' dist/output.css
-          echo "## end after cp t 1"
-          cp templates/index.html.1 src/index.html
+          echo "## end after ${{ matrix.change_cmd }} t 1"
+          ${{ matrix.change_cmd }} templates/index.html.1 src/index.html
           sleep 3
-          echo "## start after cp i 1"
+          echo "## start after ${{ matrix.change_cmd }}i 1"
           grep 'btn-cool' dist/output.css
-          echo "## end after cp i 1"
+          echo "## end after ${{ matrix.change_cmd }}i 1"
           grep 'btn-cool-1' dist/output.css
 
       - if: always()
         name: Test 2
         run: |
-          cp templates/tailwind.css.2 src/tailwind.css
+          ${{ matrix.change_cmd }} templates/tailwind.css.2 src/tailwind.css
           sleep 3
-          echo "## start after cp t 2"
+          echo "## start after ${{ matrix.change_cmd }} t 2"
           grep 'btn-cool' dist/output.css
-          echo "## end after cp t 2"
-          cp templates/index.html.2 src/index.html
+          echo "## end after ${{ matrix.change_cmd }} t 2"
+          ${{ matrix.change_cmd }} templates/index.html.2 src/index.html
           sleep 3
-          echo "## start after cp i 2"
+          echo "## start after ${{ matrix.change_cmd }}i 2"
           grep 'btn-cool' dist/output.css
-          echo "## end after cp i 2"
+          echo "## end after ${{ matrix.change_cmd }}i 2"
           grep 'btn-cool-2' dist/output.css
 
       - if: always()
